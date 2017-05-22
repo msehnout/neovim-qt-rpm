@@ -1,6 +1,6 @@
 Name:           neovim-qt
 Version:        0.2.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Neovim GUI written in Qt
 
 License:        ISC
@@ -21,6 +21,12 @@ Patch0001:      0001-Fix-compilation-on-F26.patch
 %description
 GUI for Neovim, much like a GVim for the old Vim, but written in Qt5.
 
+%package libs
+Summary: Libraries used by Neovim-Qt
+
+%description libs
+Libraries used by Neovim-Qt
+
 %prep
 %autosetup -S git
 
@@ -30,6 +36,8 @@ make %{?_smp_mflags}
 
 %install
 %make_install
+mkdir -p ${RPM_BUILD_ROOT}/%{_libdir}
+install -m 755 lib/libneovim-qt-gui.so ${RPM_BUILD_ROOT}/%{_libdir}/libneovim-qt-gui.so
 
 %files
 %{_bindir}/nvim-qt
@@ -42,7 +50,13 @@ make %{?_smp_mflags}
 %license LICENSE
 %doc README.md
 
+%files libs
+%{_libdir}/libneovim-qt-gui.so
+
 %changelog
+* Mon May 22 2017 Martin Sehnoutka <msehnout@redhat.com> - 0.2.7-3
+- Fix missing shared libraries
+
 * Mon May 22 2017 Martin Sehnoutka <msehnout@redhat.com> - 0.2.7-2
 - Use system msgpack (fixes compilation on f26)
 
