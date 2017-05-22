@@ -1,0 +1,25 @@
+From ddb1b0c7059f260387cb4aa5a5d3415df5467251 Mon Sep 17 00:00:00 2001
+From: Martin Sehnoutka <msehnout@redhat.com>
+Date: Mon, 22 May 2017 09:45:48 +0200
+Subject: [PATCH] Fix compilation on F26
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bf898dd..d7f22a8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -38,7 +38,7 @@ find_package(Qt5Network REQUIRED)
+ find_package(Qt5Test REQUIRED)
+ 
+ # msgpack
+-option(USE_SYSTEM_MSGPACK "Use system msgpack libraries " OFF)
++set(USE_SYSTEM_MSGPACK ON)
+ if(USE_SYSTEM_MSGPACK)
+ 	find_package(Msgpack REQUIRED)
+ else()
+-- 
+2.9.4
+

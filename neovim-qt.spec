@@ -1,6 +1,6 @@
 Name:           neovim-qt
 Version:        0.2.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Neovim GUI written in Qt
 
 License:        ISC
@@ -13,13 +13,16 @@ BuildRequires:  git
 BuildRequires:  gtest-devel
 BuildRequires:  qt5-devel
 BuildRequires:  neovim
+BuildRequires:  msgpack-devel
 Requires:       neovim
+
+Patch0001:      0001-Fix-compilation-on-F26.patch
 
 %description
 GUI for Neovim, much like a GVim for the old Vim, but written in Qt5.
 
 %prep
-%autosetup
+%autosetup -S git
 
 %build
 %cmake .
@@ -40,11 +43,8 @@ make %{?_smp_mflags}
 %doc README.md
 
 %changelog
+* Mon May 22 2017 Martin Sehnoutka <msehnout@redhat.com> - 0.2.7-2
+- Use system msgpack (fixes compilation on f26)
+
 * Tue May 02 2017 Martin Sehnoutka <msehnout@redhat.com> 0.2.7-1
-- Update to 0.2.7 (msehnout@redhat.com)
-
-* Sat Feb 18 2017 Sehny <msehnout@users.noreply.github.com> 0.2.5-1
-- new package built with tito
-
-* Sat Feb 18 2017 Sehny <msehnout@users.noreply.github.com>
-- First try of packaging neovim-qt
+- init 0.2.7 (msehnout@redhat.com)
